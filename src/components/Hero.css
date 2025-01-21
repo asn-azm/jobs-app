@@ -1,0 +1,33 @@
+/* Hero.css */
+.hero-container {
+    padding: 5px;
+    background-color: #1976d2;
+    color: white;
+  }
+  
+  .hero-title {
+    font-size: 50px;
+    text-align: center;
+  }
+  
+  .hero-subtitle {
+    font-size: 40px;
+    text-align: center;
+    padding: 15px;
+  }
+  
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 30px; /* Reduce font size on mobile */
+    }
+  
+    .hero-subtitle {
+      font-size: 25px; /* Reduce font size on mobile */
+      padding: 10px; /* Adjust padding for smaller screens */
+    }
+  
+    .hero-container {
+      padding: 5px; /* Adjust padding for smaller screens */
+    }
+  }
+  
