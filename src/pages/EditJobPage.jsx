@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 
 const EditJobPage = ({ updateJobSubmit }) => {
-    const job = useLoaderData();
+    const job = useLoaderData()[0];
     const [title, setTitle] = useState(job.title);
     const [type, setType] = useState(job.type);
     const [location, setLocation] = useState(job.location);

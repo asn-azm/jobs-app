@@ -7,7 +7,9 @@ import { toast } from "react-toastify";
 const JobPage = ({ deleteJob }) => {
     const navigate = useNavigate();
     const { id } = useParams();
-    const job = useLoaderData();
+    const job = useLoaderData()[0];
+    console.log('job   => ', JSON.stringify(job));
+    
 
     const onDeleteClick = (jobId) => {
         const confirm = window.confirm(`Are you sure you want to delete this listening?`)
@@ -83,7 +85,7 @@ const JobPage = ({ deleteJob }) => {
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
                     }}>
                         <Typography>Company Info:</Typography>
-                        <Typography sx={{ paddingTop: '5px', paddingBottom: '5px', fontSize: '25px' }}>{job.company.name}</Typography>
+                        {/* <Typography sx={{ paddingTop: '5px', paddingBottom: '5px', fontSize: '25px' }}>{job.company.name}</Typography> */}
                         <Typography sx={{minHeight: '45%'}}>{job.company.description}</Typography>
                         <Typography sx={{ paddingTop: '5px', paddingBottom: '5px' }}>Contact Email:</Typography>
                         <Typography sx={{ paddingTop: '5px', paddingBottom: '5px', backgroundColor: '#e8f4fa', marginTop: '10px' }}>{job.company.contactEmail}</Typography>
@@ -114,7 +116,8 @@ const JobPage = ({ deleteJob }) => {
     )
 }
 const jobLoader = async ({ params }) => {
-    const res = await fetch(`/api/jobs/${params.id}`);
+    const apiUrl = import.meta.env.VITE_APP_API_URL;
+    const res = await fetch(`${apiUrl}?id=${params.id}`);
     const data = await res.json();
     return data;
 }
