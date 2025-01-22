@@ -8,12 +8,12 @@ import EditJobPage from "./pages/EditJobPage";
 
 const App = () => {
 
-const apiUrl =  import.meta.env.VITE_APP_API_URL;
-  
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
+
 
   // Add New Job
   const addJob = async (newJob) => {
-    const res = await fetch(apiUrl, {
+    await fetch(apiUrl, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -26,16 +26,16 @@ const apiUrl =  import.meta.env.VITE_APP_API_URL;
   // Delete a Job
 
   const deleteJob = async (id) => {
-    const res = await fetch(`${apiUrl}?id=${id}`, {
+    await fetch(`${apiUrl}/${id}`, {
       method: 'DELETE',
     });
     return;
   };
 
-// Update Job
+  // Update Job
 
   const updateJob = async (job) => {
-    const res = await fetch(`${apiUrl}?id=${job.id}`, {
+    await fetch(`${apiUrl}/${job.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ const apiUrl =  import.meta.env.VITE_APP_API_URL;
       },
       {
         path: '/jobs/:id',
-        element: <JobPage deleteJob = { deleteJob}/>,
+        element: <JobPage deleteJob={deleteJob} />,
         loader: jobLoader
       },
       {
@@ -66,7 +66,7 @@ const apiUrl =  import.meta.env.VITE_APP_API_URL;
       },
       {
         path: '/edit-job/:id',
-        element: <EditJobPage updateJobSubmit={updateJob}/>,
+        element: <EditJobPage updateJobSubmit={updateJob} />,
         loader: jobLoader
       }
     ]

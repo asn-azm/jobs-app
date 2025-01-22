@@ -43,10 +43,7 @@ const ExpandMore = styled((props) => {
 
 const JobListing = ({ job }) => {
     const [expanded, setExpanded] = useState(false);
-
     let description = job.description;
-    console.log(description);
-
 
     if (!expanded) {
         description = description.substring(0, 90) + `...`;
@@ -100,7 +97,7 @@ const JobListing = ({ job }) => {
                         color: '#1976d2'
                     }}
                 >
-                    <Link to={`/jobs/${job.id}`}>
+                    <Link to={`/jobs/${job._id}`}>
                         <Button>Job Details</Button>
                     </Link>
                 </Box>
@@ -110,6 +107,7 @@ const JobListing = ({ job }) => {
 }
 JobListing.propTypes = {
     job: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,

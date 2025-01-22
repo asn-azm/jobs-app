@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { useParams, useLoaderData, Link, useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types';
 import Box from "@mui/material/Box";
 import { toast } from "react-toastify";
 
@@ -7,7 +8,7 @@ import { toast } from "react-toastify";
 const JobPage = ({ deleteJob }) => {
     const navigate = useNavigate();
     const { id } = useParams();
-    const job = useLoaderData()[0];
+    const job = useLoaderData();
     console.log('job   => ', JSON.stringify(job));
     
 
@@ -103,7 +104,7 @@ const JobPage = ({ deleteJob }) => {
                             <button className="buttonEdit" role="button" onClick={() => navigate(`/edit-job/${job.id}`)}>Edit Job</button>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '10px' }}>
-                            <button className="buttonDelete" role="button" onClick={() => onDeleteClick(job.id)}>Delete Job</button>
+                            <button className="buttonDelete" role="button" onClick={() => onDeleteClick(job._id)}>Delete Job</button>
                         </div>
 
                     </Box>
@@ -117,10 +118,18 @@ const JobPage = ({ deleteJob }) => {
 }
 const jobLoader = async ({ params }) => {
     const apiUrl = import.meta.env.VITE_APP_API_URL;
-    const res = await fetch(`${apiUrl}?id=${params.id}`);
+
+    console.log('params._id   =>', params.id, params);
+    
+
+    const res = await fetch(`${apiUrl}/${params.id}`);
     const data = await res.json();
     return data;
 }
+
+JobPage.propTypes = {
+    deleteJob: PropTypes.func.isRequired
+};
 
 export { JobPage as default, jobLoader };
 

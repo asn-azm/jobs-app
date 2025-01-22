@@ -5,7 +5,7 @@ const JobsPage = () => {
     return (
         <>
             <Hero />
-            <JobListings />
+            <JobListings isHome={false}/>
         </>
     )
 }

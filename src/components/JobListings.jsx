@@ -1,6 +1,7 @@
-import { Typography, useStepContext } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import JobListing from './JobListing'
+import PropTypes from 'prop-types';
 import '../index.css'
 
 
@@ -9,15 +10,14 @@ const JobListings = ({isHome}) => {
     const [loading, setLoading] = useState(true);
     const apiUrl = import.meta.env.VITE_APP_API_URL;
 
-    const url = isHome?`${apiUrl}?_limit=3`:`${apiUrl}`;
     useEffect(() => {
-
         const fetchJobs = async () => {
             try {
-                const res = await fetch(url);
+                const res = await fetch(apiUrl);
                 const data = await res.json();
-                setJobs(data);
-                console.log(jobs);
+                isHome?setJobs(data.slice(0, 3)):setJobs(data);
+
+                console.log('jobs   => ', jobs);
                 
             }
             catch (error) {
@@ -38,7 +38,7 @@ const JobListings = ({isHome}) => {
             </div>
             <div className='jobs-section'>
                 {jobs.map((job) => (
-                    <div className="job-listing" key={job.id}>
+                    <div className="job-listing" key={job._id}>
                         <JobListing job={job} />
                     </div>
                 ))}
@@ -47,5 +47,9 @@ const JobListings = ({isHome}) => {
         </section>
     )
 }
+
+JobListings.propTypes = {
+    isHome: PropTypes.bool.isRequired
+};
 
 export default JobListings
