@@ -54,7 +54,22 @@ const JobListing = ({ job }) => {
     };
 
     return (
-        <Card sx={{ maxWidth: '500px', minWidth:'500px' }}>
+        <Card
+            sx={{
+                maxWidth: '100%',
+                minWidth: '50px',
+                minHeight: '380px',
+                padding: {
+                    xs: 1,  // Padding for mobile devices (xs)
+                    sm: 2,  // Padding for small screens (sm)
+                    md: 3,  // Padding for medium screens (md)
+                },
+                margin: {
+                    xs: '5px',  // Margin for mobile screens
+                    sm: '10px',  // Margin for small screens
+                    md: '15px',  // Margin for medium screens
+                },
+            }}>
             <Typography sx={{ paddingTop: 3, paddingLeft: 2.5 }}>{job.type}</Typography>
             <CardHeader sx={{ marginTop: 0 }}
                 avatar={

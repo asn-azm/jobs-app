@@ -10,7 +10,7 @@ const JobPage = ({ deleteJob }) => {
     const { id } = useParams();
     const job = useLoaderData();
     console.log('job   => ', JSON.stringify(job));
-    
+
 
     const onDeleteClick = (jobId) => {
         const confirm = window.confirm(`Are you sure you want to delete this listening?`)
@@ -29,18 +29,18 @@ const JobPage = ({ deleteJob }) => {
                         color: '#1976d2'
                     }}>Back to job listings!</Typography>
                 </Link>
+            </section>
 
-            </section >
-            <section style={{ backgroundColor: '#e8f4fa', display: 'flex', justifyContent: 'space-between', minHeight: '79%' }}>
+            <section className="main-section">
                 {/* First section: Left side */}
-                <section style={{ margin: 100, maxWidth: '60%', minWidth: '60%', display: 'flex', flexDirection: 'column', gap: 100 }}>
+                <section className="left-section">
                     <Box
                         sx={{
                             padding: '30px',
                             backgroundColor: 'white',
                             minHeight: '100px',
-                            borderRadius: '16px', // Rounded corners
-                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' // Light shadow effect 
+                            borderRadius: '16px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
                         }}
                     >
                         <Typography sx={{ fontSize: '15px', color: '#a2b2ba' }}>{job.type}</Typography>
@@ -48,13 +48,15 @@ const JobPage = ({ deleteJob }) => {
                         <Typography sx={{ color: 'red' }}>{job.location}</Typography>
                     </Box>
                     <Box
+
                         sx={{
                             padding: '30px',
                             backgroundColor: 'white',
                             minHeight: '100px',
-                            borderRadius: '16px', // Rounded corners
-                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' // Light shadow effect 
+                            borderRadius: '16px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
                         }}
+
                     >
                         <Typography sx={{
                             fontSize: '20px',
@@ -70,57 +72,52 @@ const JobPage = ({ deleteJob }) => {
                 </section>
 
                 {/* Second section: Right side */}
-                <section
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        maxWidth: '20%', 
-                        minWidth: '20%',
-                        marginTop: '30px',
-                        marginRight: '50px',
-                        gap: '7%'
-                    }}
-                >
-                    <Box sx={{
-                        padding: '30px', backgroundColor: 'white', minHeight: '50%', borderRadius: '16px',
-                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
-                    }}>
-                        <Typography>Company Info:</Typography>
-                        {/* <Typography sx={{ paddingTop: '5px', paddingBottom: '5px', fontSize: '25px' }}>{job.company.name}</Typography> */}
-                        <Typography sx={{minHeight: '45%'}}>{job.company.description}</Typography>
-                        <Typography sx={{ paddingTop: '5px', paddingBottom: '5px' }}>Contact Email:</Typography>
+                <section className="right-section">
+                    <Box
+
+                        sx={{
+                            padding: '30px', backgroundColor: 'white', minHeight: '50%', borderRadius: '16px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
+                        }}
+
+
+                    >
+                        <Typography sx={{ fontSize: '25px' }}>Company Info:</Typography>
+                        <Typography sx={{ minHeight: '45%' }}>{job.company.description}</Typography>
+                        <Typography sx={{ paddingTop: '5px', paddingBottom: '5px', fontSize: '25px' }}>Contact Email:</Typography>
                         <Typography sx={{ paddingTop: '5px', paddingBottom: '5px', backgroundColor: '#e8f4fa', marginTop: '10px' }}>{job.company.contactEmail}</Typography>
                         <Typography sx={{ paddingTop: '5px', paddingBottom: '5px', backgroundColor: '#e8f4fa', marginTop: '10px' }}>{job.company.contactPhone}</Typography>
                     </Box>
 
-                    <Box sx={{
-                        padding: '30px', backgroundColor: 'white', minHeight: '20%',
-                        borderRadius: '16px',
-                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
-                    }}
+                    <Box
+
+
+                        sx={{
+                            padding: '15px', backgroundColor: 'white', maxHeight: '225%',
+                            borderRadius: '16px',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
+                        }}
+
                     >
                         <Typography sx={{ fontSize: '25px' }}>Manage Job</Typography>
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <button className="buttonEdit" role="button" onClick={() => navigate(`/edit-job/${job.id}`)}>Edit Job</button>
+                            <button className="buttonEdit" role="button" onClick={() => navigate(`/edit-job/${job._id}`)}>Edit Job</button>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '10px' }}>
                             <button className="buttonDelete" role="button" onClick={() => onDeleteClick(job._id)}>Delete Job</button>
                         </div>
-
                     </Box>
                 </section>
             </section>
-
-
-
         </>
+
     )
 }
 const jobLoader = async ({ params }) => {
     const apiUrl = import.meta.env.VITE_APP_API_URL;
 
     console.log('params._id   =>', params.id, params);
-    
+
 
     const res = await fetch(`${apiUrl}/${params.id}`);
     const data = await res.json();

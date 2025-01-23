@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import '../index.css'
 
 
-const JobListings = ({isHome}) => {
+const JobListings = ({ isHome }) => {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const apiUrl = import.meta.env.VITE_APP_API_URL;
@@ -15,10 +15,10 @@ const JobListings = ({isHome}) => {
             try {
                 const res = await fetch(apiUrl);
                 const data = await res.json();
-                isHome?setJobs(data.slice(0, 3)):setJobs(data);
+                isHome ? setJobs(data.slice(0, 3)) : setJobs(data);
 
                 console.log('jobs   => ', jobs);
-                
+
             }
             catch (error) {
                 console.log('Error Fetching Data', error);
@@ -31,10 +31,18 @@ const JobListings = ({isHome}) => {
     }, [])
 
     return (
-        <section style={{ backgroundColor: '#c0bef7', padding: '15px' }}>
+        <section style={{ backgroundColor: '#c0bef7', padding: '10px' }}>
 
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography variant="h2" sx={{ alignItems: "center", color: '#1976d2' }}>{isHome?'Recent Jobs':'Browse Jobs'}</Typography> {/* Example header */}
+                <Typography variant="h2"
+                    sx={{ 
+                        alignItems: "center", 
+                        color: '#1976d2', 
+                        whiteSpace: "nowrap",  // Prevent text wrapping
+                        width: '100%',         // Ensure full width of the container
+                        textAlign: 'center',   // Center the text horizontally
+                      }}
+                >{isHome ? 'Recent Jobs' : 'Browse Jobs'}</Typography> {/* Example header */}
             </div>
             <div className='jobs-section'>
                 {jobs.map((job) => (

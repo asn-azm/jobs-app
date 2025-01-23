@@ -22,16 +22,16 @@ const Header = () => {
   const toggleDrawer = (open) => {
     setDrawerOpen(open);
   };
-
+  // Menu items inside the drawer
   const menuItems = (
     <List>
-      <ListItem button>
+      <ListItem button component={Link} to="/">
         <ListItemText primary="Home" />
       </ListItem>
-      <ListItem button>
+      <ListItem button component={Link} to="/jobs">
         <ListItemText primary="Jobs" />
       </ListItem>
-      <ListItem button>
+      <ListItem button component={Link} to="/add-job">
         <ListItemText primary="Add Job" />
       </ListItem>
     </List>
@@ -39,7 +39,7 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position="sticky" className="appBar">
+      <AppBar position="sticky">
         <Toolbar className="toolbar">
           <WorkIcon fontSize="large" className="logoIcon" />
           <Typography variant="h6" className="typography">
@@ -47,18 +47,15 @@ const Header = () => {
           </Typography>
           {!isSmallScreen && (
             <div className="navButtons">
-              <Link to="/" color="white">
-                <Button color="inherit">Home</Button>
+              <Link to="/">
+                <Button color = "inherit" sx={{fontWeight:"bold", fontSize:'15px'}} >Home</Button>
               </Link>
-              <Link to="/jobs" color="inherit">
-                <Button color="inherit">Jobs</Button>
+              <Link to="/jobs">
+                <Button color="inherit" sx={{fontWeight:"bold", fontSize:'15px'}}>Jobs</Button>
               </Link>
-              <Link to="/add-job" color="inherit">
-                <Button color="inherit">Add Job</Button>
+              <Link to="/add-job">
+                <Button color="inherit" sx={{fontWeight:"bold", fontSize:'15px'}}>Add Job</Button>
               </Link>
-              {/* <Button  color="inherit">Home</Button>
-              <Button color="inherit">Jobs</Button>
-              <Button color="inherit">Add Job</Button> */}
             </div>
           )}
           {isSmallScreen && (

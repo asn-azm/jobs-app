@@ -2,8 +2,8 @@ html,
 body {
   height: 100%;
   margin: 0;
-  /* display: flex; */
-  /* flex-direction: column; */
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 #root {
@@ -13,27 +13,27 @@ body {
   /* flex-grow: 1; */
 }
 
-
-
 .jobs-section {
   margin: 25px;
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
-  /* Center items horizontally */
-  align-items: center;
-  /* Align items vertically in the center */
-  gap: 100px;
-  /* Adjust gap between items */
+  justify-content: center; /* Center items horizontally */
+  align-items: flex-start; /* Align items at the top */
+  gap: 30px; /* Adjust gap between items */
 }
 
 /* Set the maximum width for each job item (flex item) */
 .job-listing {
+  max-width: 400px;
+  box-sizing: border-box; /* Ensures padding and borders are included in width calculation */
+  flex: 1 1 100%; /* Default to take full width on small screens */
+}
 
-  max-width: 700px;
-  /* Optional: Prevents the job listing from growing too large */
-  box-sizing: border-box;
-  /* Ensures padding and borders are included in width calculation */
+/* For large screens (laptop and up), show 3 cards in a row */
+@media (min-width: 768px) {
+  .job-listing {
+    flex: 1 1 30%; /* Take 30% of the width, making 3 cards in a row */
+  }
 }
 
 
@@ -131,11 +131,184 @@ body {
   }
 }
 
-.form-divs{
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 5px;
+
+/* General Form Section */
+.form-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh; /* Full height of the screen */
+  background-color: #e8f4fa;
 }
-.form-inputs{
-  min-width: 100%;
+
+/* Add Job Heading */
+.form-heading {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #0078d0;
 }
+
+/* Form Container */
+.form-container {
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  width: 90%;
+  padding: 20px;
+  display: flex;
+  justify-content: center; /* Adjusts the layout to have two sections */
+  align-items: center;
+  flex-direction: row !important; /* Make sure it is in a row for larger screens */
+  gap: 50px;
+  margin: 20px;
+}
+
+/* Flex layout for Left and Right sections */
+.form-left, .form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50% !important; /* Each section takes 50% of the width on larger screens */
+}
+
+/* Input and select styles */
+.form-inputs {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Form Divs */
+.form-divs {
+  padding: 10px 0;
+}
+
+/* Submit Button */
+.submit-button {
+  background-color: #0078d0;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-button:hover {
+  background-color: #005fa3;
+}
+
+/* Layout for Larger Screens (laptop and up) */
+@media (min-width: 768px) {
+  .form-container {
+    flex-direction: row; /* Keep two sections side by side */
+    padding: 20px 40px;
+  }
+
+  .form-left, .form-right {
+    width: 50%; /* Each section takes 50% of the width */
+  }
+
+  .form-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+}
+
+/* Mobile Layout */
+@media (max-width: 767px) {
+  .form-container {
+    flex-direction: column; /* Stack sections vertically on mobile */
+    padding: 10px;
+  }
+
+  .form-left, .form-right {
+    width: 100%; /* Each section takes full width on mobile */
+  }
+
+  .form-button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+/* Default styling for larger screens */
+.main-section {
+  display: flex;
+  justify-content: space-between;
+  min-height: 79%;
+  background-color: #e8f4fa;
+}
+
+.left-section,
+.right-section {
+  margin: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+}
+
+.box {
+  padding: 30px;
+  background-color: white;
+  min-height: 100px;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.buttonEdit, .buttonDelete {
+  background-color: #1976d2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.buttonEdit:hover, .buttonDelete:hover {
+  background-color: #005fa3;
+}
+
+/* Media query for mobile (max-width: 767px) */
+@media (max-width: 767px) {
+  /* Stack the sections vertically on mobile */
+  .main-section {
+      flex-direction: column;
+      justify-content: center;
+  }
+
+  .left-section,
+  .right-section {
+      max-width: 100%; /* Allow sections to take full width */
+      gap: 20px; /* Adjust gap between sections */
+      margin: 20px;
+  }
+
+  .box {
+      padding: 10px; /* Reduce padding for mobile */
+  }
+
+  .right-section .box {
+      max-height: none; /* Adjust max-height for better content display */
+  }
+
+  /* Adjust buttons to be centered and full width on mobile */
+  .buttonEdit, .buttonDelete {
+      display: block;
+      width: 100%; /* Make buttons full width */
+      margin: 10px 10px;
+      text-align: center;
+  }
+}
+
+

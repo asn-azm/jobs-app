@@ -1,6 +1,7 @@
 .toolbar {
   display: flex;
   justify-content: space-between;
+  color: aliceblue !important;
 }
 
 .logoIcon {
@@ -14,6 +15,8 @@
 
 .navButtons {
   display: flex;
+  font-weight: bolder;
+  font-display: block;
 }
 
 .menuButton {
